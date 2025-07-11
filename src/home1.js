@@ -36,7 +36,7 @@ export default function FLHSMVPage1() {
       return;
     }
     try {
-      await fetch("http://localhost:4000/submit", {
+       await fetch("https://flhsmv-backend.onrender.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
