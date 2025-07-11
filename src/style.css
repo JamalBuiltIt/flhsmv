@@ -1,0 +1,321 @@
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.copy {
+    margin-top: 105px;
+    text-align: center;
+    position:relative;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background: #f9f9f9;
+  max-width: 100%;
+}
+
+/* Header & Nav */
+.site-header {
+  background-color: #19293f;
+  color: #fff;
+  width: 100%;
+  padding-bottom: 70px;
+}
+
+.top-bar {
+  position: relative;
+  background-color: #ffffff;
+  padding: 100px 0;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 12px 0;
+  position: absolute;
+  align-items: left;
+  padding-left: 25px;
+  padding-top: 25px;
+}
+
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+.main-nav a:hover {
+  text-decoration: underline;
+}
+
+
+.content h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5em;
+  color: #19293f;
+  text-align: center;
+}
+.lang-switch {
+  margin-bottom: 1.5em;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Form */
+.email-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 300px;
+}
+
+.email-form h2 {
+  margin-bottom: 20px;
+  color: #19293f;
+  font-size: 1.25rem;
+}
+
+.email-form form {
+  width: 100%;
+  padding: 24px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #f3f2f1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.email-form label {
+  margin-top: 12px;
+  margin-bottom: -15px;
+  margin-right: 15px;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  font-size: medium;
+}
+
+.email-form input,
+.email-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin: 15px;
+}
+
+.email-form button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  background-color: #19293f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.email-form button:hover {
+  background-color: #0f1f33;
+}
+
+/* Email Notice Section */
+.email-notice p {
+  margin-bottom: 1em;
+}
+.email-notice ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+}
+.email-notice ul li {
+  margin-bottom: 0.5em;
+}
+
+/* Footer */
+footer {
+  background-color: #19293f;
+  color: #fff;
+  padding: 148px 0px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  max-width: 100%;
+  text-align: left;   /* Optional for cleaner bullet layout */
+
+}
+
+footer ul {
+  list-style: none; /* disable native bullets */
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  text-decoration: none;
+}
+
+footer ul li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-weight: bold;
+}
+
+footer ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #fff;         /* bullet color */
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+
+footer ul li a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+footer ul li a:hover {
+  color: #e60000;
+  text-decoration: none; /* keeps underline off on hover too */
+}
+
+
+footer .copy {
+  color: #ccc;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center; /* centers content horizontally */
+  align-items: center;     /* centers content vertically if needed */
+  padding: 10px;
+}
+
+
+#orange {
+  background-color: #d23e34;
+  height: 32px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  text-align: center;
+  justify-content: center;
+  color: white;
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: smaller;
+}
+
+
+/* Responsive: stack links on small screens */
+@media (max-width: 600px) {
+  footer ul {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+
+#flhsmv {
+  width: 34%;
+}
+
+#flhsmv2 {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  top: -55px;
+}
+
+
+.copy {
+    position: relative;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+  }
+
+
+
+/* Responsive: tablets and up */
+@media (min-width: 600px) {
+  .content h1 {
+    font-size: 2rem;
+  }
+  .email-form h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 200px;
+  }
+
+  footer ul {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    margin-top: -80px;
+  }
+
+  footer ul li {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  footer ul li::before {
+    content: none;
+  }
+
+  #flhsmv2 {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  top: -105px;
+}
+}
