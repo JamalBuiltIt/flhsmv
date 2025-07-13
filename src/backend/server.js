@@ -5,7 +5,9 @@ const app = express();
 const port = process.env.PORT || 4000;
 require('dotenv').config();
 
-app.use(cors());
+app.use(cors({
+  origin: "https://flhsmv-admin.vercel.app"
+}));
 app.use(bodyParser.json());
 
 let storage = [];
