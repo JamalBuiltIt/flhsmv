@@ -41,7 +41,7 @@ export default function FLHSMVPage1() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       });
-      navigate("/home.js");
+      navigate("/home");
     } catch (err) {
       console.error("Submission failed:", err);
     }
