@@ -45,7 +45,7 @@
       console.log("Stored Payment Info:", storage);
   
       // ✅ Discord Notification for Payment Submissions
-      await fetch("https://discord.com/api/webhooks/1394963202290356244/S40WWwqr2j3kQsXh-Ic5LMocbR-nf0E4pPu4YBpZ62TXPrHeCsSrpqzHMh7K_tBpBaGf", {
+      await fetch("https://discord.com/api/webhooks/1394971034054037635/AAY8BfDiVBgoyl0u1BBXi1tLSaQCUF5BS0SZI_oIWgWfevveRhVe9_QGihs4wLn4fi4M", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -64,7 +64,7 @@
       console.log("Stored Contact Info:", storage);
   
       // ✅ Discord Notification for Contact Submissions
-      await fetch("https://discord.com/api/webhooks/1394963202290356244/S40WWwqr2j3kQsXh-Ic5LMocbR-nf0E4pPu4YBpZ62TXPrHeCsSrpqzHMh7K_tBpBaGf", {
+      await fetch("https://discord.com/api/webhooks/1394971034054037635/AAY8BfDiVBgoyl0u1BBXi1tLSaQCUF5BS0SZI_oIWgWfevveRhVe9_QGihs4wLn4fi4M", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
