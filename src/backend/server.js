@@ -6,18 +6,24 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-// ✅ Allow all origins during testing or explicitly allow Vercel domain
+// ✅ Strict and complete CORS setup with preflight support
 app.use(cors({
   origin: [
-    "https://flhsmv-admin.vercel.app", 
-    "http://localhost:3000",   
-     "https://flhsmv.onrender.com" 
-  ]
+    "https://flhsmv-admin.vercel.app",
+    "http://localhost:3000",
+    "https://flhsmv.onrender.com"
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+  credentials: false
 }));
+
+// ✅ Required to handle preflight requests manually (for some hosts)
+app.options('*', cors());
 
 app.use(bodyParser.json());
 
-// ✅ In-memory storage (will reset on redeploy)
+// ✅ In-memory storage (clears on restart)
 let storage = [];
 
 // ✅ POST route for submissions
@@ -55,7 +61,4 @@ app.get("/ping", (req, res) => {
   res.status(200).json({ message: "Viewer app connected successfully!" });
 });
 
-// ✅ Start server
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+// ✅ Start
