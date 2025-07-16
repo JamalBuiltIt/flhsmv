@@ -55,7 +55,7 @@ export default function FLHSMVPage() {
           <input type="tel" id="phone" name="phone" onChange={handleChange} />
 
           <label htmlFor="subject">State/Province/Region</label>
-          <input type="text" id="subject" name="subject" onChange={handleChange} />
+          <input type="text" id="subject" name="state" onChange={handleChange} />
 
           <label htmlFor="message">ZIP / Postal Code</label>
           <input type="text" name="message" required onChange={handleChange} />
