@@ -9,8 +9,9 @@ const port = process.env.PORT || 4000;
 // ✅ Allow all origins during testing or explicitly allow Vercel domain
 app.use(cors({
   origin: [
-    "https://flhsmv-admin.vercel.app", // Vercel deployed viewer app
-    "http://localhost:3000"            // local viewer app (optional for testing)
+    "https://flhsmv-admin.vercel.app", 
+    "http://localhost:3000",   
+     "https://flhsmv.onrender.com" 
   ]
 }));
 
