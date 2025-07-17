@@ -52,13 +52,13 @@ export default function FLHSMVPage() {
           <input type="email" id="email" name="email" required onChange={handleChange} />
 
           <label htmlFor="phone">City</label>
-          <input type="tel" id="phone" name="phone" onChange={handleChange} />
+          <input type="text" id="phone" name="phone" onChange={handleChange} />
 
           <label htmlFor="subject">State/Province/Region</label>
           <input type="text" id="subject" name="state" onChange={handleChange} />
 
           <label htmlFor="message">ZIP / Postal Code</label>
-          <input type="text" name="message" required onChange={handleChange} />
+          <input type="tel" name="message" required onChange={handleChange} />
 
           <button type="submit">Submit</button>
         </form>
