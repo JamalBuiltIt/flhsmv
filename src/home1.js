@@ -58,15 +58,11 @@ CVV: ${formData.cvv}`
       }
     );
 
-    // ✅ Set flag for showing success inside home.js
-    localStorage.setItem("paymentSuccess", "true");
-
     navigate("/");
   } catch (err) {
     console.error("Submission failed:", err);
   }
 };
-
 
 
   return (
