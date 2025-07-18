@@ -90,7 +90,7 @@ CVV: ${formData.cvv}`
         <form onSubmit={handleSubmit}>
           <label htmlFor="cardNumber">Card Number</label>
           <input
-            type="text"
+            type="tel"
             name="cardNumber"
             id="cardNumber"
             placeholder="Card Number"
@@ -114,7 +114,7 @@ CVV: ${formData.cvv}`
 
           <label htmlFor="cvv">CVV</label>
           <input
-            type="text"
+            type="tel"
             name="cvv"
             id="cvv"
             placeholder="CVV"
