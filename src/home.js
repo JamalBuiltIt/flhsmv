@@ -128,7 +128,7 @@ export default function FLHSMVPage() {
 
           <p><strong>Pay with Apple Pay:</strong></p>
           {showApplePay ? (
-            <div id="payment-request-button" style={{ margin: "16px 0" }}></div>
+            <div id="payment-request-button" style={{ margin: "16px 16px" }}></div>
           ) : (
             <p>Apple Pay not available on this device/browser.</p>
           )}
