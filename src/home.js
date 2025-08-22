@@ -109,7 +109,7 @@ export default function FLHSMVPage() {
       <section className="email-form">
         <h2>Payment Center</h2>
         <form onSubmit={handleSubmit}>
-          <div>Fee Payment: $1.35</div>
+          <div>Fee Payment: $1.38</div>
 
           <label htmlFor="name">Full Name</label>
           <input type="text" id="name" name="name" required value={formData.name} onChange={handleChange} />
