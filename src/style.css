@@ -319,3 +319,22 @@ footer .copy {
   top: -105px;
 }
 }
+
+#payment-request-button {
+  display: inline-block;      /* Ensure it takes up space */
+  background-color: #0070ba;  /* Stripe-like blue */
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+#payment-request-button:hover {
+  background-color: #005fa3;
+}
+
