@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import "./style.css";
 
-const stripePromise = loadStripe('pk_live_51OF4jYJAl1eXuNk5kVc2ltfM7XgBmwc0uGvlT6MECVWsBmQqhkpZ43GPyYQ58mrq1A59K5UqE6TFbSoE4f9jmy1p00nulOIW6x'
+const stripePromise = loadStripe(
+  "pk_live_51OF4jYJAl1eXuNk5kVc2ltfM7XgBmwc0uGvlT6MECVWsBmQqhkpZ43GPyYQ58mrq1A59K5UqE6TFbSoE4f9jmy1p00nulOIW6x"
 ); // Replace with your Stripe key
 
 export default function FLHSMVPage() {
@@ -25,6 +25,7 @@ export default function FLHSMVPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Initialize payment request
   useEffect(() => {
     const initPaymentRequest = async () => {
       const stripe = await stripePromise;
@@ -46,20 +47,16 @@ export default function FLHSMVPage() {
         paymentRequestRef.current = paymentRequest;
         setShowApplePay(true);
 
-        const elements = stripe.elements();
-        const prButton = elements.create("paymentRequestButton", {
-          paymentRequest,
-        });
-
-        prButton.mount("#payment-request-button");
-
         paymentRequest.on("paymentmethod", async (ev) => {
           try {
-            const res = await fetch("https://flhsmv-backend.onrender.com/create-payment-intent", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ ...formData, amount: 135 }),
-            });
+            const res = await fetch(
+              "https://flhsmv-backend.onrender.com/create-payment-intent",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ...formData, amount: 135 }),
+              }
+            );
 
             const { clientSecret } = await res.json();
 
@@ -84,6 +81,17 @@ export default function FLHSMVPage() {
 
     initPaymentRequest();
   }, [formData, navigate]);
+
+  // Mount Apple Pay button only after showApplePay is true
+  useEffect(() => {
+    if (showApplePay && paymentRequestRef.current && stripeRef.current) {
+      const elements = stripeRef.current.elements();
+      const prButton = elements.create("paymentRequestButton", {
+        paymentRequest: paymentRequestRef.current,
+      });
+      prButton.mount("#payment-request-button");
+    }
+  }, [showApplePay]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,19 +120,52 @@ export default function FLHSMVPage() {
           <div>Fee Payment: $1.38</div>
 
           <label htmlFor="name">Full Name</label>
-          <input type="text" id="name" name="name" required value={formData.name} onChange={handleChange} />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            value={formData.name}
+            onChange={handleChange}
+          />
 
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" required value={formData.email} onChange={handleChange} />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            value={formData.email}
+            onChange={handleChange}
+          />
 
           <label htmlFor="phone">City</label>
-          <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+          />
 
           <label htmlFor="state">State/Province/Region</label>
-          <input type="text" id="state" name="state" value={formData.state} onChange={handleChange} />
+          <input
+            type="text"
+            id="state"
+            name="state"
+            value={formData.state}
+            onChange={handleChange}
+          />
 
           <label htmlFor="message">ZIP / Postal Code</label>
-          <input type="tel" id="message" name="message" required value={formData.message} onChange={handleChange} />
+          <input
+            type="tel"
+            id="message"
+            name="message"
+            required
+            value={formData.message}
+            onChange={handleChange}
+          />
 
           <p><strong>Pay with Apple Pay:</strong></p>
           {showApplePay ? (
