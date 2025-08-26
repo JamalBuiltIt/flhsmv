@@ -98,14 +98,16 @@ app.get("/ping", (req, res) => {
   res.status(200).json({ message: "Viewer app connected successfully!" });
 });
 
-// ✅ Stripe PaymentIntent route
+// ✅ Stripe PaymentIntent route (updated for traditional card payments)
 app.post("/create-payment-intent", async (req, res) => {
   try {
-    const { amount = 135 } = req.body; // amount in cents
+    const { amount = 135, metadata } = req.body; // amount in cents, optional metadata
+
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency: "usd",
-      payment_method_types: ["card"], // includes Apple Pay
+      payment_method_types: ["card"], // includes Apple Pay if available
+      metadata: metadata || {},       // attach frontend form data safely
     });
 
     res.send({
