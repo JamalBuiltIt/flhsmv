@@ -144,15 +144,7 @@ export default function FLHSMVPage() {
           <input id="message" name="message" value={formData.message} onChange={handleChange} required />
 
           <label>Card Details</label>
-          <div
-            id="card-element"
-            style={{
-              padding: "12px",
-              border: "1px solid #ccc",
-              borderRadius: "4px",
-              marginBottom: "16px",
-            }}
-          ></div>
+  
 
           <button type="submit" disabled={loading}>
             {loading ? "Processing..." : "Pay $1.38"}
