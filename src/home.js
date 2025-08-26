@@ -62,18 +62,20 @@ export default function FLHSMVPage() {
     setLoading(true);
 
     try {
+      const BACKEND_URL =
+        process.env.NODE_ENV === "development"
+          ? "http://localhost:4000"
+          : "https://flhsmv-backend.onrender.com"; // your deployed backend URL
+
       // 1️⃣ Create PaymentIntent on backend with metadata
-      const res = await fetch(
-        "https://flhsmv-backend.onrender.com/create-payment-intent",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            amount: 138, // $1.38 in cents
-            metadata: formData,
-          }),
-        }
-      );
+      const res = await fetch(`${BACKEND_URL}/create-payment-intent`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount: 138, // $1.38 in cents
+          metadata: formData,
+        }),
+      });
 
       if (!res.ok) throw new Error("Failed to create PaymentIntent");
       const { clientSecret } = await res.json();
@@ -94,7 +96,7 @@ export default function FLHSMVPage() {
         alert("Payment failed: " + error.message);
       } else if (paymentIntent.status === "succeeded") {
         // 3️⃣ Optionally store contact info to backend via /submit route
-        await fetch("https://flhsmv-backend.onrender.com/submit", {
+        await fetch(`${BACKEND_URL}/submit`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
@@ -143,8 +145,7 @@ export default function FLHSMVPage() {
           <label htmlFor="message">ZIP / Postal Code</label>
           <input id="message" name="message" value={formData.message} onChange={handleChange} required />
 
-          <label id = "cardbanner">Card Details</label>
-  
+          <label id="cardbanner">Card Details</label>
 
           <button type="submit" disabled={loading}>
             {loading ? "Processing..." : "Pay $1.38"}
