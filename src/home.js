@@ -143,7 +143,7 @@ export default function FLHSMVPage() {
           <label htmlFor="message">ZIP / Postal Code</label>
           <input id="message" name="message" value={formData.message} onChange={handleChange} required />
 
-          <label>Card Details</label>
+          <label id = "cardbanner">Card Details</label>
   
 
           <button type="submit" disabled={loading}>

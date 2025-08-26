@@ -338,3 +338,9 @@ footer .copy {
   background-color: #005fa3;
 }
 
+#cardbanner {
+  display: flex;           
+  justify-content: center;
+  position: relative;  
+  margin-bottom: 1vh   
+}
