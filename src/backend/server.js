@@ -119,7 +119,7 @@ app.post("/create-payment-intent", async (req, res) => {
   }
 });
 
-// ✅ Start the server ONCE
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server running on port ${port}`);
 });
+
