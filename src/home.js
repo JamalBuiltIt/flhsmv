@@ -26,9 +26,12 @@ export default function FLHSMVPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Initialize Stripe Elements
+  // Initialize Stripe Elements safely
   useEffect(() => {
-    (async () => {
+    const setupStripe = async () => {
+      const cardContainer = document.getElementById("card-element");
+      if (!cardContainer) return;
+
       const stripe = await stripePromise;
       stripeRef.current = stripe;
       const elements = stripe.elements();
@@ -47,9 +50,11 @@ export default function FLHSMVPage() {
         },
       });
 
-      card.mount("#card-element");
+      card.mount(cardContainer);
       cardElementRef.current = card;
-    })();
+    };
+
+    setupStripe();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -65,7 +70,7 @@ export default function FLHSMVPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             amount: 138, // $1.38 in cents
-            metadata: formData, // attach form data to paymentIntent
+            metadata: formData,
           }),
         }
       );
@@ -139,8 +144,17 @@ export default function FLHSMVPage() {
           <input id="message" name="message" value={formData.message} onChange={handleChange} required />
 
           <label>Card Details</label>
-          
-          <button type="submit" disabled={loading} style={{ marginTop: "16px" }}>
+          <div
+            id="card-element"
+            style={{
+              padding: "12px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              marginBottom: "16px",
+            }}
+          ></div>
+
+          <button type="submit" disabled={loading}>
             {loading ? "Processing..." : "Pay $1.38"}
           </button>
         </form>
